@@ -233,7 +233,7 @@ describe('POST /users', () => {
         .post('/users')
         .send({
             email: users[0].email,
-            password: 'Pass123!'
+            password: 'userOnePass'
         })
         .expect(400)
         .end(done);
