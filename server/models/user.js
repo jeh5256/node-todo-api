@@ -64,7 +64,7 @@ UserSchema.methods.removeToken = function(token) {
                 token
             }
         }
-    })
+    });
 };
 
 UserSchema.statics.findByToken = function(token) {
