@@ -9,29 +9,30 @@ const userTwoID = new ObjectID();
 
 const users = [{
     _id: userOneID,
-    email: 'jeh5256123@gmail.com',
+    email: 'jeh5212@test.com',
     password: 'userOnePass',
     tokens: [{
-        access: 'auth',
-        token: jwt.sign({_id: userOneID, access: 'auth'}, 'abc123').toString()
+      access: 'auth',
+      token: jwt.sign({_id: userOneID, access: 'auth'}, 'abc123').toString()
     }]
-}, {
+  }, {
     _id: userTwoID,
-    email: 'gen@example.com',
-    password: 'xwuserTwoPass'
+    email: 'gen123@test.com',
+    password: 'userTwoPass',
+    tokens: [{
+      access: 'auth',
+      token: jwt.sign({_id: userTwoID, access: 'auth'}, 'abc123').toString()
+    }]
 }];
 
 const todos = [{
     _id: new ObjectID(),
-    text: 'First test todo'
+    text: 'First test todo',
+    _creator: userOneID
 }, {
     _id: new ObjectID(),
-    text: 'Second test todo'
-}, {
-    _id: new ObjectID(),
-    text: 'Third test todo',
-    completed: true,
-    completedAt: 333
+    text: 'Second test todo',
+    _creator: userTwoID
 }];
 
 const populateTodos = (done) => {
@@ -45,8 +46,8 @@ const populateUsers = (done) => {
         var userOne = new User(users[0]).save();
         var userTwo = new User(users[1]).save();
 
-        return Promise.all([userOne, userTwo]).then(() => done());
-    });
-}
+        return Promise.all([userOne, userTwo]);
+    }).then(() => done());
+};
 
 module.exports = {todos, populateTodos, users, populateUsers};
